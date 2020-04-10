@@ -43,10 +43,12 @@ Imagine a driver management frontend that is used internally by employees to cre
 * return list of drivers
 ---
 ## Task 4 (optional)
+
 This task is _voluntarily_, if you can't get enough of hacking tech challenges, implement security.
-Secure the API so that authentication is needed to access it. The details are up to you.
+Secure the API so that authentication is needed to access it. The details are up to you. 
 Please include instructions how to authenticate/login, so that we can test the endpoints you implemented!
----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------------------------------------------------------
 ## WHAT COULD HAVE BE DONE BETTER
 
 
@@ -88,9 +90,9 @@ Please include instructions how to authenticate/login, so that we can test the e
  jackson mapper -- ( partially valid) again nitpicking, but it would be nicer this way
  
 * JPA query methods could be optimized ( some examples):
->> 1. DefaultCarService.create: car data is not needed so carRepository.findByLicensePlate(…) -> carRepository
+1. DefaultCarService.create: car data is not needed so carRepository.findByLicensePlate(…) -> carRepository
 .existsByLicensePlate(licensePlate) -- ( valid) it is faster query
->> 2. DefaultDriverService.findByCarRating: can be simplified to -> return driverRepository.findByCarRating(rating)
+2. DefaultDriverService.findByCarRating: can be simplified to -> return driverRepository.findByCarRating(rating)
 && DefaultDriverService.findByLicensePlate: can be simplified to -> return driverRepository.findByCarLicensePlate
 (licensePlate) -- ( valid) especially stands for findByCarRating as it would be much faster if done on repository level
 
