@@ -49,6 +49,28 @@ Secure the API so that authentication is needed to access it. The details are up
 Please include instructions how to authenticate/login, so that we can test the endpoints you implemented!
 
 ------------------------------------------------------------------------------------------------------------------------------
+## HOW TO USE THE APP
+
+The endpoints are secured as described in task 4. Swagger docs are publicly available but if you want to access H2 console, there is a line in SecurityConfig.configure method to uncomment. For securing the endpoints the most basic approach was taken
+
+The tests are in taxi_dispatcher/src/test/java/de/br/aff package.Every endpoint that exists in the app has it's test. That's why the usage of data.sql script is redundant. But in case you still want to access the app "from the outside" you may use it. It's entity ids are negative numbers, so they don't affect integration tests. 
+
+There are also scripts to help with docker and make a calls to some of endpoints:
+To start the app you can use docker or do it directly from your IDE. If you want to use docker there is a script ./scripts/docker/create-docker-image.sh to create an image and ./scripts/docker/run-docker-image.sh to run it. 
+
+Once you have the app running, first try ./scripts/rest-requests/get-cars.sh and you'll get Http status 401, proving that this endpoint is secured
+To authorise as basic user execute ./scripts/rest-requests/login-as-basic-user.sh - it will log you in as basic user - it creates cookie.txt in scripts folder and that cookie should be used in all subsequent requests
+If you execute ./scripts/rest-requests/get-cars.sh now, you'll get cars. ./scripts/rest-requests/get-driver.sh returns a driver with id=-4
+
+For selecting car please use ./scripts/rest-requests/select-car.sh. It assigns a car to the driver with id=-4 so calling again ./scripts/rest-requests/get-driver.sh should show that car are selected. To deselect car, there is a script ./scripts/rest-requests/deselect-car.sh
+
+If you call ./scripts/rest-requests/get-drivers-internal.sh it will return 403 because this is internal endpoint and it can be accessed only by admins. To log in as ADMIN execute ./scripts/rest-requests/login-as-admin.sh
+As an admin you can now call ./scripts/rest-requests/get-drivers-internal.sh but also 
+./scripts/rest-requests/get-cars.sh and ./scripts/rest-requests/get-driver.sh
+
+Please bare in mind that there are many other endpoints not covered by scripts. For the whole overview it's best to use swagger docs.
+
+------------------------------------------------------------------------------------------------------------------------------
 ## WHAT COULD HAVE BE DONE BETTER
 
 
